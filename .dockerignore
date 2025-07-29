@@ -1,0 +1,10 @@
+.git
+.gitignore
+node_modules
+vendor
+var
+docker/nginx/certs
+.env
+.env.local
+tests
+*.log
