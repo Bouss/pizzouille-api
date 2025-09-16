@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Shared\Domain\Event\StoredEvent" table="event">
+
+        <id name="eventId" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="eventBody" type="json_string" column="body" />
+        
+        <field name="typeName" type="string" column="type_name" />
+        
+        <field name="occurredOn" type="datetimetz_immutable" column="occurred_on" />
+
+    </entity>
+</doctrine-mapping>
