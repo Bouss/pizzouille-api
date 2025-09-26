@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Content\Domain\Model\Ingredient" schema="content" table="ingredient">
+
+        <unique-constraints>
+            <unique-constraint columns="code" name="ingredient_code_unique_idx"/>
+        </unique-constraints>
+
+        <id name="id" type="ingredient_id" column="id"/>
+
+        <field name="code" type="code" column="code"/>
+
+        <field name="name" type="localized_string" column="name"/>
+
+        <field name="type" enum-type="App\Content\Domain\ValueObject\IngredientType" column="type"/>
+
+        <field name="cost" type="float" column="cost"/>
+
+        <field name="createdAt" type="datetimetz_immutable" column="created_at"/>
+
+        <field name="updatedAt" type="datetimetz_immutable" column="updated_at" nullable="true"/>
+
+    </entity>
+</doctrine-mapping>

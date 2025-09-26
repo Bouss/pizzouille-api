@@ -5,8 +5,8 @@ ARG GID
 
 # System deps
 RUN apt-get update && apt-get install -y \
-    git unzip zip libzip-dev libpq-dev librabbitmq-dev postgresql-client netcat-openbsd \
-    && docker-php-ext-install pdo pdo_pgsql zip \
+    git unzip zip libzip-dev libpq-dev librabbitmq-dev postgresql-client netcat-openbsd libicu-dev \
+    && docker-php-ext-install pdo pdo_pgsql zip intl \
     && pecl install amqp && docker-php-ext-enable amqp \
     && rm -rf /var/lib/apt/lists/*
 

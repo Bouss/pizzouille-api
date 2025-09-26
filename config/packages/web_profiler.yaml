@@ -1,0 +1,14 @@
+when@dev:
+    web_profiler:
+        toolbar: false
+
+    framework:
+        profiler:
+          { collect: true, collect_serializer_data: true, enabled: true}
+
+when@test:
+    web_profiler:
+      toolbar: false
+
+    framework:
+        profiler: { collect: true, collect_serializer_data: true, enabled: true }

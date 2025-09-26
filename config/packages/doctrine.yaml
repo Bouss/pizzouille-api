@@ -1,36 +1,40 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
-
-        # IMPORTANT: You MUST configure your server version,
-        # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '16'
-
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
+        types:
+            code: App\Shared\Infrastructure\Persistence\Doctrine\Type\DoctrineCodeType
+            ingredient_id: App\Content\Infrastructure\Persistence\Doctrine\Type\DoctrineIngredientIdType
+            json_string: App\Shared\Infrastructure\Persistence\Doctrine\Type\DoctrineJsonStringType
+            localized_string: App\Shared\Infrastructure\Persistence\Doctrine\Type\DoctrineTranslatableStringType
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
+        enable_native_lazy_objects: true
         report_fields_where_declared: true
         validate_xml_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         identity_generation_preferences:
             Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
-        auto_mapping: true
+        auto_mapping: false
         mappings:
-            App:
-                type: attribute
-                is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
-        controller_resolver:
-            auto_mapping: false
+          content_domain:
+            is_bundle: false
+            type: xml
+            dir: '%kernel.project_dir%/src/Content/Infrastructure/Persistence/Doctrine/resources'
+            prefix: 'App\Content\Domain\Model'
+            alias: ContentDomain
+          shared_domain:
+            is_bundle: false
+            type: xml
+            dir: '%kernel.project_dir%/src/Shared/Infrastructure/Persistence/Doctrine/resources'
+            prefix: 'App\Shared\Domain\Event'
+            alias: SharedDomain
 
 when@test:
     doctrine:
         dbal:
-            # "TEST_TOKEN" is typically set by ParaTest
             dbname_suffix: '_test%env(default::TEST_TOKEN)%'
 
 when@prod:

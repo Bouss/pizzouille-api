@@ -1,25 +1,33 @@
 {
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/dbal": "^4.2",
-        "doctrine/doctrine-bundle": "^2.14",
-        "doctrine/doctrine-migrations-bundle": "^3.4",
-        "doctrine/orm": "^3.3",
-        "symfony/console": "7.2.*",
-        "symfony/dotenv": "7.2.*",
-        "symfony/flex": "^2",
-        "symfony/framework-bundle": "7.2.*",
-        "symfony/runtime": "7.2.*",
-        "symfony/yaml": "7.2.*"
+        "ext-intl": "*",
+        "doctrine/dbal": "^4.3.3",
+        "doctrine/doctrine-bundle": "^2.16.2",
+        "doctrine/doctrine-migrations-bundle": "^3.4.2",
+        "doctrine/orm": "^3.5.2",
+        "symfony/console": "^7.3.3",
+        "symfony/dotenv": "^7.3.2",
+        "symfony/flex": "^2.8.2",
+        "symfony/framework-bundle": "^7.3.3",
+        "symfony/messenger": "^7.3.3",
+        "symfony/property-access": "^7.3.3",
+        "symfony/property-info": "^7.3.1",
+        "symfony/runtime": "^7.3.1",
+        "symfony/serializer": "^7.3.3",
+        "symfony/uid": "^7.3.1",
+        "symfony/validator": "^7.3.3",
+        "symfony/yaml": "^7.3.3"
     },
     "config": {
         "allow-plugins": {
+            "pestphp/pest-plugin": true,
             "php-http/discovery": true,
             "symfony/flex": true,
             "symfony/runtime": true
@@ -65,7 +73,17 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.2.*"
+            "require": "^7"
         }
+    },
+    "require-dev": {
+        "pestphp/pest": "^4.1",
+        "pestphp/pest-plugin": "^4.0",
+        "phpunit/phpunit": "^12.3.8",
+        "symfony/browser-kit": "^7.3.2",
+        "symfony/phpunit-bridge": "^7.3.3",
+        "symfony/stopwatch": "^7.3",
+        "symfony/twig-bundle": "^7",
+        "symfony/web-profiler-bundle": "^7.3.3"
     }
 }
