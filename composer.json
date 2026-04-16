@@ -1,26 +1,37 @@
 {
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/dbal": "^4.2",
-        "doctrine/doctrine-bundle": "^2.14",
-        "doctrine/doctrine-migrations-bundle": "^3.4",
-        "doctrine/orm": "^3.3",
-        "symfony/console": "7.2.*",
-        "symfony/dotenv": "7.2.*",
-        "symfony/flex": "^2",
-        "symfony/framework-bundle": "7.2.*",
-        "symfony/runtime": "7.2.*",
-        "symfony/yaml": "7.2.*"
+        "ext-intl": "*",
+        "doctrine/dbal": "^4.4.3",
+        "doctrine/doctrine-bundle": "^3.2.2",
+        "doctrine/doctrine-migrations-bundle": "^4",
+        "doctrine/orm": "^3.6.3",
+        "nelmio/api-doc-bundle": "^5.10",
+        "symfony/console": "^8.0.8",
+        "symfony/dotenv": "^8.0.8",
+        "symfony/flex": "^2.10",
+        "symfony/framework-bundle": "^8.0.8",
+        "symfony/intl": "^8.0.8",
+        "symfony/messenger": "^8.0.8",
+        "symfony/property-access": "^8.0.8",
+        "symfony/property-info": "^8.0.8",
+        "symfony/runtime": "^8.0.8",
+        "symfony/serializer": "^8.0.8",
+        "symfony/uid": "^8.0.8",
+        "symfony/validator": "^8.0.8",
+        "symfony/yaml": "^8.0.8"
     },
     "config": {
         "allow-plugins": {
+            "pestphp/pest-plugin": true,
             "php-http/discovery": true,
+            "phpstan/extension-installer": true,
             "symfony/flex": true,
             "symfony/runtime": true
         },
@@ -65,7 +76,25 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.2.*"
+            "require": "^8"
         }
+    },
+    "require-dev": {
+        "deptrac/deptrac": "^4.6",
+        "friendsofphp/php-cs-fixer": "^3.94",
+        "pestphp/pest": "^4.5",
+        "pestphp/pest-plugin": "^4",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-doctrine": "^2.0",
+        "phpstan/phpstan-symfony": "^2.0",
+        "rector/rector": "^2.4",
+        "symfony/browser-kit": "^8.0.8",
+        "symfony/maker-bundle": "^1.67",
+        "symfony/phpunit-bridge": "^8.0.8",
+        "symfony/stopwatch": "^8.0.8",
+        "symfony/twig-bundle": "^8.0.8",
+        "symfony/web-profiler-bundle": "^8.0.8",
+        "zenstruck/foundry": "^2.9.2"
     }
 }

@@ -1,12 +1,12 @@
-FROM php:8.4-fpm
+FROM php:8.5-fpm
 
 ARG UID
 ARG GID
 
 # System deps
 RUN apt-get update && apt-get install -y \
-    git unzip zip libzip-dev libpq-dev librabbitmq-dev postgresql-client netcat-openbsd \
-    && docker-php-ext-install pdo pdo_pgsql zip \
+    git unzip zip libzip-dev libpq-dev librabbitmq-dev postgresql-client netcat-openbsd libicu-dev \
+    && docker-php-ext-install pdo pdo_pgsql zip intl \
     && pecl install amqp && docker-php-ext-enable amqp \
     && rm -rf /var/lib/apt/lists/*
 
@@ -19,6 +19,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Set up Composer cache directory
 RUN mkdir -p /var/www/.composer && \
     chown -R www-data:www-data /var/www/.composer
+
+# Copy PHP configuration
+COPY docker/php/php.ini /usr/local/etc/php/conf.d/custom.ini
 
 # Copy entrypoint
 COPY docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
