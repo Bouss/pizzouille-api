@@ -1,0 +1,4 @@
+controllers_content:
+    resource: ../../src/Content/UI/Http/
+    type: attribute
+    prefix: /api/content

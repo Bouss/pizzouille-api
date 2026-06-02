@@ -1,0 +1,3 @@
+controllers_shared:
+    resource: ../../src/Shared/UI/Http/
+    type: attribute

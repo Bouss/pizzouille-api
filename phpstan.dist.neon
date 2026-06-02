@@ -1,0 +1,18 @@
+parameters:
+    level: 6
+    paths:
+        - bin/
+        - config/
+        - public/
+        - src/
+        - tests/
+    tmpDir: var/cache/phpstan
+    ignoreErrors:
+        # Pest dynamically adds methods to TestCall via uses() in tests/Pest.php
+        -
+            message: '#Call to an undefined method Pest\\PendingCalls\\TestCall::(jsonRequest|jsonResponse|responseStatusCode|client)\(\)#'
+            path: tests/Feature/**/*Test.php
+        # Pest's expect() function has dynamic template type resolution
+        -
+            message: '#Unable to resolve the template type TValue in call to function expect#'
+            path: tests/Feature/**/*Test.php

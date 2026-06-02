@@ -1,0 +1,58 @@
+framework:
+    messenger:
+        default_bus: messenger.bus.default
+
+        buses:
+            messenger.bus.default:
+                middleware:
+                    - App\Shared\Infrastructure\Messaging\IntegrationEventRoutingMiddleware
+                    - doctrine_transaction
+
+        transports:
+            sync: 'sync://'
+
+            # Producers
+            integration_events:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                serializer: messenger.transport.symfony_serializer
+                options:
+                    exchange:
+                        name: integration_events
+                        type: topic
+
+            # Consumers
+            content:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                serializer: messenger.transport.symfony_serializer
+                options:
+                    exchange:
+                        name: integration_events
+                        type: topic
+                    queues:
+                        content.integration_events:
+                            binding_keys:
+                                - 'content.ingredient.created'
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+                failure_transport: content.failed
+
+            content.failed:
+                dsn: 'doctrine://default?queue_name=content_failed'
+
+        # Fallback dead-letter transport for any transport that doesn't define its own.
+        failure_transport: content.failed
+
+        routing:
+            App\Shared\Contracts\Message\IntegrationEvent: integration_events
+
+when@test:
+    framework:
+        messenger:
+            transports:
+                integration_events: 'in-memory://'
+                content: 'sync://'
+                content.failed: 'in-memory://'
+            routing:
+                App\Shared\Contracts\Message\IntegrationEvent: ['integration_events', 'content']

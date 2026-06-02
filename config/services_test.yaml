@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    # Swap the Meilisearch indexer for an in-memory one so the test suite
+    # asserts indexing without requiring a running search engine.
+    App\Tests\Common\Search\InMemoryIngredientIndexer:
+        public: true
+
+    App\Content\Domain\Search\IngredientIndexerInterface:
+        alias: App\Tests\Common\Search\InMemoryIngredientIndexer
+        public: true
